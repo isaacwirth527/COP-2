@@ -11,7 +11,21 @@ public class SpriteManager : MonoBehaviour {
     public Story rightStory;
     public Story LeftStory; 
 
-    public Sprite Mac; 
+    public Sprite Mac;
+    public Sprite RandomGuard;
+    public Sprite Hurley;
+    public Sprite Kraglin;
+    public Sprite Pizard; 
+    public Sprite RandomNPC;
+    public Sprite SleepingLord;
+    public Sprite ShadyGuy;
+    public Sprite Teller;
+    public Sprite Steve; 
+
+
+    public Sprite Rogue;
+    public Sprite Warrior; 
+
 
 
     // Start is called before the first frame update
@@ -37,5 +51,26 @@ public class SpriteManager : MonoBehaviour {
 
 
         storyText.text = text;
+        
+            if (text.Contains("Mac:"))
+            {
+                 storyImage.sprite = Mac; 
+            }
+            if (text.Contains("Guard:"))
+            {
+                 storyImage.sprite = RandomGuard;
+            }
+            if (text.Contains("Steve:"))
+            {
+                 storyImage.sprite = Steve; 
+            }
+            if (text.Contains("Kraglin:"))
+            {
+                storyImage.sprite = Kraglin; 
+            }
+            if (text.Contains("Hurley:"))
+            {
+            storyImage.sprite = Hurley; 
+            }
     }
 }
