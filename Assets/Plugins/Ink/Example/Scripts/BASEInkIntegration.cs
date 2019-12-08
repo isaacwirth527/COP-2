@@ -162,4 +162,9 @@ public class BASEInkIntegration : MonoBehaviour
 
 
     }
+
+	public Story GetStory()
+	{
+		return story;
+	}
 }
