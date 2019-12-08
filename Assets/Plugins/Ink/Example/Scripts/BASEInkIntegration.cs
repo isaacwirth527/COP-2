@@ -78,6 +78,7 @@ public class BASEInkIntegration : MonoBehaviour
 				button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choice);
 				});
+				button.Select();
 			}
 		}
 
@@ -100,7 +101,8 @@ public class BASEInkIntegration : MonoBehaviour
 				button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choices);
 				});
-			}
+				button.Select();
+			}		
 		}
 		CreateContentView(text);
 	}
