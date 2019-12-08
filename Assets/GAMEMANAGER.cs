@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GAMEMANAGER : MonoBehaviour
 {
 //public GameObject leftPlayer;
@@ -13,6 +14,9 @@ public class GAMEMANAGER : MonoBehaviour
 	public BASEInkIntegration rightInk;
     public Story storyLeft;
     public Story storyRight;
+
+    public Button leftButtons;
+    
     
 	public static int p1Honor, p2Honor, p1Dishonor, p2Dishonor, p1Cunning, p2Cunning, p2Brash, p1Brash;
 
@@ -24,20 +28,40 @@ public class GAMEMANAGER : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        p1Honor = storyLeft.EvaluateFunction("honor");
+        p1Honor = (int)storyLeft.variablesState["health"];
         Debug.Log("p1Honor =" + p1Honor);
-        p2Honor = storyRight.EvaluateFunction("honor");
+        p2Honor = (int)storyRight.variablesState["health"];
         Debug.Log("p2Honor =" + p2Honor);
-        p1Dishonor = storyLeft.EvaluateFunction("dishonor");
-        p2Dishonor = storyRight.EvaluateFunction("dishonor");
-        p1Cunning = storyLeft.EvaluateFunction("cunning");
-        p2Cunning = storyRight.EvaluateFunction("cunning");
-        p1Brash = storyRight.EvaluateFunction("brash");
-        p2Brash = storyLeft.EvaluateFunction("brash");
+        p1Dishonor = (int)storyLeft.variablesState["dishonor"];
+        p2Dishonor = (int)storyRight.variablesState["dishonor"];
+        p1Cunning = (int)storyLeft.variablesState["cunning"];
+        p2Cunning = (int)storyRight.variablesState["cunning"];
+        p1Brash = (int)storyLeft.variablesState["brash"];
+        p2Brash = (int)storyRight.variablesState["brash"];
     }
 
     void SceneCheck()
     {
+         if(p1DetermineHonor() == p2DetermineHonor())
+        {
+            SceneManager.LoadScene("Cutscene1");
+
+        }
+         if(!p1DetermineHonor() == !p2DetermineHonor())
+        {
+            SceneManager.LoadScene("Cutscene2");
+
+        }
+         if(p1DetermineHonor() && !p2DetermineHonor())
+        {
+            SceneManager.LoadScene("Cutscene3");
+
+        }
+         if(!p1DetermineHonor() && p2DetermineHonor())
+        {
+            SceneManager.LoadScene("Cutscene4");
+
+        }
 
     }
 
@@ -48,7 +72,7 @@ public class GAMEMANAGER : MonoBehaviour
 
     void DetermineAttack()
     {
-    		leftPlayerAttacks.Add(sneakAttack());
+    	leftPlayerAttacks.Add(sneakAttack());
 
     	if (brash >= cunning)
     	{
@@ -56,11 +80,11 @@ public class GAMEMANAGER : MonoBehaviour
     	}
     }
 
+   
     public int sneakAttack()
     {
-    	return 20;
+        return 20;
     }
-
     public int stab()
     {
     	return 10;
@@ -71,7 +95,7 @@ public class GAMEMANAGER : MonoBehaviour
     	return true;
     }
 
-    public bool distract()
+    public void distract()
     {
     	warriorAdv();
     }
@@ -86,7 +110,7 @@ public class GAMEMANAGER : MonoBehaviour
     	return 10;
     }
 
-    public bool disarm()
+    public void disarm()
     {
     	rogueAdv();
     }
@@ -160,5 +184,8 @@ public class GAMEMANAGER : MonoBehaviour
         {
             return false;
         }
+  
     }
 }
+
+ 
