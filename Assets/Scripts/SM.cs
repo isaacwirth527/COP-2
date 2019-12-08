@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
 
-public class NEWSpriteManager : MonoBehaviour { 
+public class SM : MonoBehaviour 
+{ 
 
     public GameObject player1;
     public GameObject player2;
@@ -38,14 +39,7 @@ public class NEWSpriteManager : MonoBehaviour {
         rightStory = player2.GetComponent<BASEInkIntegration>().GetStory();
         LeftStory = player1.GetComponent<BASEInkIntegration>().GetStory(); 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void CreateContentView(string text)
+    public void CreateContentView(string text)
     {
         var storyText = Instantiate(textPrefab);
         GameObject storyImageObject = new GameObject();
@@ -57,26 +51,29 @@ public class NEWSpriteManager : MonoBehaviour {
 
 
         storyText.text = text;
-        
-            if (text.Contains("Mac:"))
+
+        if (text.Contains("Mac:"))
             {
                  storyImage = Mac; 
             }
-            if (text.Contains("Guard:"))
+        if (text.Contains("Guard:"))
             {
                  storyImage = RandomGuard;
             }
-            if (text.Contains("Steve:"))
+        if (text.Contains("Steve:"))
             {
                  storyImage = Steve; 
             }
-            if (text.Contains("Kraglin:"))
+        if (text.Contains("Kraglin:"))
             {
                 storyImage = Kraglin; 
             }
-            if (text.Contains("Hurley:"))
+        if (text.Contains("Hurley:"))
             {
             storyImage = Hurley; 
             }
+            
     }
 }
+
+

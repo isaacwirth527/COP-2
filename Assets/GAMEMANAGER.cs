@@ -72,12 +72,12 @@ public class GAMEMANAGER : MonoBehaviour
 
     void DetermineAttack()
     {
-    	leftPlayerAttacks.Add(sneakAttack());
+    	// leftPlayerAttacks.Add(sneakAttack());
 
-    	if (brash >= cunning)
-    	{
+    	// if (brash >= cunning)
+    	// {
 
-    	}
+    	// }
     }
 
    
