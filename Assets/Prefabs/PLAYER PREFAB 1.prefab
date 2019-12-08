@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2237965920722195638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2237965920722195635}
+  - component: {fileID: 2237965920722195632}
+  - component: {fileID: 298662240757857698}
+  - component: {fileID: 4327871737729551605}
+  m_Layer: 0
+  m_Name: PLAYER PREFAB 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2237965920722195635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2237965920722195638}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -4049.224}
+  m_LocalScale: {x: 44.99138, y: 44.99138, z: 44.99138}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2237965920722195632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2237965920722195638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &298662240757857698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2237965920722195638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 4327871737729551605}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.InputSystem.PlayerInput+DeviceLostEvent, Unity.InputSystem,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.InputSystem.PlayerInput+DeviceRegainedEvent, Unity.InputSystem,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Joystick
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &4327871737729551605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2237965920722195638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RepeatDelay: 0.5
+  m_RepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_PointAction: {fileID: 1054132383583890850, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_MoveAction: {fileID: 3710738434707379630, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_SubmitAction: {fileID: 2064916234097673511, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_MiddleClickAction: {fileID: 3279352641294131588, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
+  m_TrackedDeviceSelectAction: {fileID: 2559092417903258184, guid: 6be2988d7cdea884ea2b7d5a4b808cc5,
+    type: 3}
