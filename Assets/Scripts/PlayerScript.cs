@@ -11,6 +11,8 @@ public class PlayerScript : MonoBehaviour
     public int magicAttackDamage;
     public int meleeAttackDamage;
 
+    public Button[] playerButtons;
+
     public bool choose;
 
     int enemyHealth;
@@ -28,22 +30,22 @@ public class PlayerScript : MonoBehaviour
         health.value = playerHealth;
     }
 
-    public void magicAttack1()
-    {
-        enemyHealth -= magicAttackDamage;
-        Debug.Log("Enemy took " + magicAttackDamage + "damage.");
-    }
+    // public void magicAttack1()
+    // {
+    //     enemyHealth -= magicAttackDamage;
+    //     Debug.Log("Enemy took " + magicAttackDamage + "damage.");
+    // }
 
-    public void fight()
-    {
-        enemyHealth -= meleeAttackDamage;
-        Debug.Log("Enemy took " + meleeAttackDamage + "damage.");
-    }
+    // public void fight()
+    // {
+    //     enemyHealth -= meleeAttackDamage;
+    //     Debug.Log("Enemy took " + meleeAttackDamage + "damage.");
+    // }
 
-    public void run()
-    {
-        Debug.Log("Can't escape!");
-    }
+    // public void run()
+    // {
+    //     Debug.Log("Can't escape!");
+    // }
 
     public void setChoseFalse()
     {
@@ -53,6 +55,11 @@ public class PlayerScript : MonoBehaviour
     public void setChoseTrue()
     {
         choose = true;
+    }
+
+    public int adv(int i)
+    {
+        return i*2;
     }
     
 }

@@ -55,5 +55,9 @@ public class EnemyScript : MonoBehaviour
         players[randomPlayer].GetComponent<PlayerScript>().playerHealth -= fightDamage;
     }
 
+    public int adv(int i)
+    {
+        return i*2;
+    }
    
 }
