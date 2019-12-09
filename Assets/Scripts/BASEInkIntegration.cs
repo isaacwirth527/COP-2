@@ -167,27 +167,6 @@ public class BASEInkIntegration : MonoBehaviour
 
     }
 
-	// void p2Select(Button button1, Button button2)
-	// {
-	// 	Button currentlySelected = button1;
-	// 	if(Input.GetAxis("P2Horizontal") < 0)
-	// 	{
-	// 		currentlySelected = button1;
-	// 		button1.Select();
-	// 		Debug.Log("Left button selected p2");
-	// 	}
-	// 	if(Input.GetAxis("P2Horizontal") > 0)
-	// 	{
-	// 		currentlySelected = button2;
-	// 		button2.Select();
-	// 		Debug.Log("Right button selected p2");
-	// 	}
-	// 	else
-	// 	{
-	// 		currentlySelected.Select();
-	// 	}
-	// }
-
     void RemoveChildren () {
 		int childCount = textCanvas.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
@@ -211,19 +190,19 @@ public class BASEInkIntegration : MonoBehaviour
 	{
 		if(choicesAvailable)
 		{
-			return false;
+			return true;
 		}
-		else if (story.canContinue)
-		{
-			return false;
-		}
+		// else if (story.canContinue)
+		// {
+		// 	return false;
+		// }
 		else if(!choicesAvailable && !story.canContinue)
 		{
-			return true;
+			return false;
 		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
 

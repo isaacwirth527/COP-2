@@ -63,7 +63,7 @@ public class GAMEMANAGER : MonoBehaviour
         p1Brash = (int)storyLeft.variablesState["brash"];
         p2Brash = (int)storyRight.variablesState["brash"];
 
-        if(!storyLeft.canContinue == !storyRight.canContinue && !leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
+        if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
         {
             SceneChange();
             DetermineAttackP1();
