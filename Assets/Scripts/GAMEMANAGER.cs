@@ -65,22 +65,26 @@ public class GAMEMANAGER : MonoBehaviour
         p2Cunning = (int)storyRight.variablesState["cunning"];
         p1Brash = (int)storyLeft.variablesState["brash"];
         p2Brash = (int)storyRight.variablesState["brash"];
+        SceneChange();
 
-        if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
-        {
-            SceneChange();
-
-        }
+       
     }
 
     void SceneChange()
     {
-        fightSceneStart = true;
-        twoStories.SetActive(false);
-        RPGfight.SetActive(true);
-        DetermineAttackP1();
-        DetermineAttackP2();
-        fightSceneStart = false;
+         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
+        {
+          
+             
+            DetermineAttackP1();
+            DetermineAttackP2();
+            twoStories.SetActive(false);
+            RPGfight.SetActive(true);
+            leftInk.stopButtonsPlease = true;
+            leftInk.stopButtonsPlease = true;
+
+        }
+        
 
     }
 

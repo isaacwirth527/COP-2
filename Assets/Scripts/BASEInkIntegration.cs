@@ -27,8 +27,10 @@ public class BASEInkIntegration : MonoBehaviour
 	public GAMEMANAGER gm;
 	public Button[] buttons;
 	public bool choicesAvailable;
+	public bool stopButtonsPlease;
 	private void Start()
 	{
+		stopButtonsPlease = false;
 		buttonsExist = false;
 		story = new Story(_inkJsonAsset.text);
 		RemoveChildren();
@@ -192,7 +194,8 @@ public class BASEInkIntegration : MonoBehaviour
 
 	public bool AreChoicesAvailable()
 	{
-		
+		if(!stopButtonsPlease)
+		{
 			if(choicesAvailable)
 			{
 				return true;
@@ -205,6 +208,11 @@ public class BASEInkIntegration : MonoBehaviour
 			{
 				return true;
 			}
+		}
+		else
+		{
+			return false;
+		}
 	
 	}
 
