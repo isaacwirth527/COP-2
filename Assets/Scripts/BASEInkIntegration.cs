@@ -28,6 +28,19 @@ public class BASEInkIntegration : MonoBehaviour
 	public Button[] buttons;
 	public bool choicesAvailable;
 	public bool stopButtonsPlease;
+
+	public Sprite Mac;
+    public Sprite RandomGuard;
+    public Sprite Hurley;
+    public Sprite Kraglin;
+    public Sprite Pizard; 
+    public Sprite RandomNPC;
+    public Sprite SleepingLord;
+    public Sprite ShadyGuy;
+    public Sprite Teller;
+    public Sprite Steve; 
+    public SpriteRenderer spriteRenderer;
+    public Sprite storyImage;
 	private void Start()
 	{
 		stopButtonsPlease = false;
@@ -57,6 +70,7 @@ public class BASEInkIntegration : MonoBehaviour
 
 	private void Update()
 	{
+		spriteRenderer.sprite = storyImage;
 		RefreshView();
 		if(choicesAvailable)
 		{
@@ -133,6 +147,27 @@ public class BASEInkIntegration : MonoBehaviour
 		var storyText = Instantiate(textPrefab);
 		storyText.text = text;
 		storyText.transform.SetParent (textCanvas.transform, false);
+
+		if (text.Contains("Mac"))
+            {
+                 storyImage = Mac; 
+            }
+        if (text.Contains("Guard"))
+            {
+                 storyImage = RandomGuard;
+            }
+        if (text.Contains("Steve"))
+            {
+                 storyImage = Steve; 
+            }
+        if (text.Contains("Kraglin"))
+            {
+                storyImage = Kraglin; 
+            }
+        if (text.Contains("Hurley"))
+            {
+            storyImage = Hurley; 
+            }
 	}
 	
 	    // Creates a button showing the choice text
