@@ -8,6 +8,7 @@ using UnityEngine.Events;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class BASEInkIntegration : MonoBehaviour
+
 {
 	[SerializeField] private TextAsset _inkJsonAsset;
 	[SerializeField] private Story story;
@@ -23,6 +24,7 @@ public class BASEInkIntegration : MonoBehaviour
 	public InputScript inputScript;
 	public bool buttonsExist;
 
+	public GAMEMANAGER gm;
 	public Button[] buttons;
 	public bool choicesAvailable;
 	private void Start()
@@ -63,7 +65,8 @@ public class BASEInkIntegration : MonoBehaviour
 		}
 	}
 
-	void RefreshView(){
+	void RefreshView()
+	{
 
         if (!playerInput()) return;
 				
@@ -167,7 +170,8 @@ public class BASEInkIntegration : MonoBehaviour
 
     }
 
-    void RemoveChildren () {
+    void RemoveChildren () 
+	{
 		int childCount = textCanvas.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
 			Destroy (textCanvas.transform.GetChild (i).gameObject);
@@ -188,22 +192,20 @@ public class BASEInkIntegration : MonoBehaviour
 
 	public bool AreChoicesAvailable()
 	{
-		if(choicesAvailable)
-		{
-			return true;
-		}
-		// else if (story.canContinue)
-		// {
-		// 	return false;
-		// }
-		else if(!choicesAvailable && !story.canContinue)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		
+			if(choicesAvailable)
+			{
+				return true;
+			}
+			else if(!choicesAvailable && !story.canContinue)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+	
 	}
 
 	void PlayerInputManager(Button button1, Button button2)
@@ -218,5 +220,4 @@ public class BASEInkIntegration : MonoBehaviour
 		}
 
 	}
-	
 }

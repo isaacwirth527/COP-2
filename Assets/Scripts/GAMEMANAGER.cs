@@ -36,12 +36,15 @@ public class GAMEMANAGER : MonoBehaviour
 
     public Button[] playerLeftButtons;
     public Button[] playerRightButtons;
+
+    public bool fightSceneStart;
     
 	public static int p1Honor, p2Honor, p1Dishonor, p2Dishonor, p1Cunning, p2Cunning, p2Brash, p1Brash;
 
     // Start is called before the first frame update
     void Start()
     {
+        fightSceneStart = false;
         storyLeft = new Story(JSONLeft.text);
         storyRight = new Story (JSONRight.text);
         RPGfight.SetActive(false);
@@ -66,57 +69,22 @@ public class GAMEMANAGER : MonoBehaviour
         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
         {
             SceneChange();
-            DetermineAttackP1();
-            DetermineAttackP2();
+
         }
     }
 
     void SceneChange()
     {
+        fightSceneStart = true;
         twoStories.SetActive(false);
         RPGfight.SetActive(true);
+        DetermineAttackP1();
+        DetermineAttackP2();
+        fightSceneStart = false;
 
     }
 
-    void DetermineAttackP1()
-    {
-        if (p1Cunning > p1Brash)
-        {
-            if(round1)
-            {
-                sneakAttack();
-            }
-            else
-            {
-                stab();
-            }
-            dodge();
-            distract();
-        }
-        else
-        {
-            goLow();
-            standardAttack();
-            knifeThrow();
-                    
-         }
-    }
-        void DetermineAttackP2()
-    {
-        if (p2Cunning > p2Brash)
-        {
-            feint();
-            standardAttack();
-            disarm();
-        }
-        else
-        {
-            charge();
-            standardAttack();
-            goHigh();
-                    
-         }
-    }
+
 
    
     public Button sneakAttack()
@@ -161,7 +129,7 @@ public class GAMEMANAGER : MonoBehaviour
         return newButton;
     }
 
-    public bool standardAttack()
+    public Button standardAttack()
     {
         Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Attack";
@@ -178,14 +146,14 @@ public class GAMEMANAGER : MonoBehaviour
         return newButton;
     }
 
-    public Button goLow()
-	{
-        Button newButton = Instantiate(buttonPrefab);
-        newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Go Low";
-        newButton.onClick.AddListener(()=>damageR(15));
-        newButton.onClick.AddListener(setWarriorAdv);
-        return newButton;
-    }
+    // public Button goLow()
+	// {
+    //     Button newButton = Instantiate(buttonPrefab);
+    //     newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Go Low";
+    //     newButton.onClick.AddListener(()=>damageR(15));
+    //     newButton.onClick.AddListener(setWarriorAdv);
+    //     return newButton;
+    // }
 
     public Button knifeThrow()
     {
@@ -278,6 +246,45 @@ public class GAMEMANAGER : MonoBehaviour
             return false;
         }
   
+    }
+        void DetermineAttackP1()
+    {
+        if (p1Cunning > p1Brash)
+        {
+            if(round1)
+            {
+                sneakAttack();
+            }
+            else
+            {
+                stab();
+            }
+            dodge();
+            distract();
+        }
+        else
+        {
+            // goLow();
+            standardAttack();
+            knifeThrow();
+                    
+         }
+    }
+        void DetermineAttackP2()
+    {
+        if (p2Cunning > p2Brash)
+        {
+            feint();
+            standardAttack();
+            disarm();
+        }
+        else
+        {
+            charge();
+            standardAttack();
+            goHigh();
+                    
+         }
     }
 }
 
