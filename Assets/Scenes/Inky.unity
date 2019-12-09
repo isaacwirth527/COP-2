@@ -699,8 +699,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 2114034643}
-  player1: {fileID: 739693323}
-  player2: {fileID: 546641211}
+  player1: {fileID: 1373511864}
+  player2: {fileID: 290412938}
   turnCounter: 0
   p1Choose: {fileID: 690941752}
   p2Choose: {fileID: 2139196276}
@@ -2364,8 +2364,10 @@ MonoBehaviour:
   buttonCanvas: {fileID: 1061127087}
   inputScript: {fileID: 932656005}
   buttonsExist: 0
+  gm: {fileID: 2033568789}
   buttons: []
   choicesAvailable: 0
+  stopButtonsPlease: 0
 --- !u!1 &889658662
 GameObject:
   m_ObjectHideFlags: 0
@@ -5137,7 +5139,12 @@ MonoBehaviour:
   rightInk: {fileID: 2143890804}
   JSONLeft: {fileID: 4900000, guid: 9caa4cab46f08744ebd321e822c69e23, type: 3}
   JSONRight: {fileID: 4900000, guid: bac944b03f5d123449e7ef76a93d5103, type: 3}
-  buttonPrefab: {fileID: 11455116, guid: 37c108a6c38964f79a6621eccb33ddc1, type: 3}
+  buttonPrefabL1: {fileID: 834393324}
+  buttonPrefabL2: {fileID: 1566147089}
+  buttonPrefabL3: {fileID: 1375956160}
+  buttonPrefabR1: {fileID: 1670511824}
+  buttonPrefabR2: {fileID: 919651140}
+  buttonPrefabR3: {fileID: 209212390}
   round1: 0
   rogueDodge: 0
   rogueAdv: 0
@@ -5146,8 +5153,6 @@ MonoBehaviour:
   enemy: {fileID: 2114034644}
   playerLeftScript: {fileID: 1373511864}
   playerRightScript: {fileID: 290412938}
-  playerLeftButtons: []
-  playerRightButtons: []
 --- !u!4 &2033568790
 Transform:
   m_ObjectHideFlags: 0
@@ -5508,5 +5513,7 @@ MonoBehaviour:
   buttonCanvas: {fileID: 215170363}
   inputScript: {fileID: 932656005}
   buttonsExist: 0
+  gm: {fileID: 2033568789}
   buttons: []
   choicesAvailable: 0
+  stopButtonsPlease: 0

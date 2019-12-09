@@ -194,8 +194,6 @@ public class BASEInkIntegration : MonoBehaviour
 
 	public bool AreChoicesAvailable()
 	{
-		if(!stopButtonsPlease)
-		{
 			if(choicesAvailable)
 			{
 				return true;
@@ -208,11 +206,6 @@ public class BASEInkIntegration : MonoBehaviour
 			{
 				return true;
 			}
-		}
-		else
-		{
-			return false;
-		}
 	
 	}
 
