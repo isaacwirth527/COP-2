@@ -5,6 +5,7 @@ using Ink.Runtime;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 public class GAMEMANAGER : MonoBehaviour
 {
     public GameObject RPGfight;
@@ -52,9 +53,9 @@ public class GAMEMANAGER : MonoBehaviour
     void Update()
     {
         p1Honor = (int)storyLeft.variablesState["honor"];
-        Debug.Log("p1Honor =" + p1Honor);
+        //Debug.Log("p1Honor =" + p1Honor);
         p2Honor = (int)storyRight.variablesState["honor"];
-        Debug.Log("p2Honor =" + p2Honor);
+        //Debug.Log("p2Honor =" + p2Honor);
         p1Dishonor = (int)storyLeft.variablesState["dishonor"];
         p2Dishonor = (int)storyRight.variablesState["dishonor"];
         p1Cunning = (int)storyLeft.variablesState["cunning"];

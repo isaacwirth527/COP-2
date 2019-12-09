@@ -4,6 +4,7 @@ using System.Collections;
 using Ink.Runtime;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class BASEInkIntegration : MonoBehaviour
@@ -19,9 +20,14 @@ public class BASEInkIntegration : MonoBehaviour
 	[SerializeField] private Canvas textCanvas;
 	[SerializeField] private Canvas buttonCanvas;
 
+	public InputScript inputScript;
+	public bool buttonsExist;
+
+	public Button[] buttons;
 	public bool choicesAvailable;
 	private void Start()
 	{
+		buttonsExist = false;
 		story = new Story(_inkJsonAsset.text);
 		RemoveChildren();
 		var text = story.Continue();
@@ -38,8 +44,9 @@ public class BASEInkIntegration : MonoBehaviour
                     OnClickChoiceButton(choice);
                 });
                 button.Select();
+				//buttons[i] = button;
             }
-         
+
         }
 		CreateContentView(text);
 	}
@@ -47,7 +54,13 @@ public class BASEInkIntegration : MonoBehaviour
 	private void Update()
 	{
 		RefreshView();
-		AreChoicesAvailable();
+		if(choicesAvailable)
+		{
+			for (int i = 0; i < buttons.Length; i++)
+			{
+				 inputScript.buttons[i] = buttons[i];
+			}
+		}
 	}
 
 	void RefreshView(){
@@ -80,7 +93,8 @@ public class BASEInkIntegration : MonoBehaviour
 				button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choice);
 				});
-				button.Select();
+				button.Select();				
+				inputScript.buttons[i] = button;
 			}
 		}
 
@@ -93,18 +107,18 @@ public class BASEInkIntegration : MonoBehaviour
 		RemoveChildren();
 		var text = story.Continue();
 		var choiceText = "";
-
-		
 		if (story.currentChoices.Count > 0)
 		{
 			for (var i = 0; i < story.currentChoices.Count; i++) {
 				Choice choices = story.currentChoices [i];
 				Button button = CreateChoiceView (choices.text.Trim ());
+				Debug.Log("Button should be in inspector");
 				button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choices);
 				});
 				button.Select();
-			}		
+				
+			}	
 		}
 		CreateContentView(text);
 	}
@@ -130,6 +144,7 @@ public class BASEInkIntegration : MonoBehaviour
 		HorizontalLayoutGroup layoutGroup = choice.GetComponent <HorizontalLayoutGroup> ();
 		layoutGroup.childForceExpandHeight = false;
 		choicesAvailable = true;
+		buttonsExist = true;
 		return choice;
 	}
     bool playerInput()
@@ -151,6 +166,28 @@ public class BASEInkIntegration : MonoBehaviour
 
 
     }
+
+	// void p2Select(Button button1, Button button2)
+	// {
+	// 	Button currentlySelected = button1;
+	// 	if(Input.GetAxis("P2Horizontal") < 0)
+	// 	{
+	// 		currentlySelected = button1;
+	// 		button1.Select();
+	// 		Debug.Log("Left button selected p2");
+	// 	}
+	// 	if(Input.GetAxis("P2Horizontal") > 0)
+	// 	{
+	// 		currentlySelected = button2;
+	// 		button2.Select();
+	// 		Debug.Log("Right button selected p2");
+	// 	}
+	// 	else
+	// 	{
+	// 		currentlySelected.Select();
+	// 	}
+	// }
+
     void RemoveChildren () {
 		int childCount = textCanvas.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
@@ -160,7 +197,7 @@ public class BASEInkIntegration : MonoBehaviour
 		for (int i = buttonChildCount - 1; i >= 0; --i) {
 			Destroy (buttonCanvas.transform.GetChild (i).gameObject);
 		}
-
+		buttonsExist = false;
 		choicesAvailable = false;
 
     }
@@ -189,4 +226,18 @@ public class BASEInkIntegration : MonoBehaviour
 			return false;
 		}
 	}
+
+	void PlayerInputManager(Button button1, Button button2)
+	{
+		if(Input.GetAxis("P2Horizontal") > 0)
+		{
+			button2.Select();
+		}
+			if(Input.GetAxis("P2Horizontal") < 0)
+		{
+			button1.Select();
+		}
+
+	}
+	
 }
