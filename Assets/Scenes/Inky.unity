@@ -535,7 +535,7 @@ RectTransform:
   - {fileID: 1734534964}
   - {fileID: 350232458}
   m_Father: {fileID: 739693324}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -698,14 +698,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acb324eb15aa9f4bba996af915bd878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  player1: {fileID: 0}
-  player2: {fileID: 0}
+  enemy: {fileID: 2114034643}
+  player1: {fileID: 739693323}
+  player2: {fileID: 546641211}
   turnCounter: 0
-  p1Choose: {fileID: 0}
-  p2Choose: {fileID: 0}
-  p1Animator: {fileID: 0}
-  p2Animator: {fileID: 0}
+  p1Choose: {fileID: 690941752}
+  p2Choose: {fileID: 2139196276}
+  p1Animator: {fileID: 1373511861}
+  p2Animator: {fileID: 290412935}
 --- !u!4 &116159683
 Transform:
   m_ObjectHideFlags: 0
@@ -1198,14 +1198,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d229afd3ff63590419cc53910637ff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUI: {fileID: 0}
-  playerHealth: 0
-  enemy: {fileID: 0}
-  magicAttackDamage: 0
-  meleeAttackDamage: 0
+  playerUI: {fileID: 23955500}
+  playerHealth: 100
+  enemy: {fileID: 2114034643}
+  magicAttackDamage: 75
+  meleeAttackDamage: 40
   playerButtons: []
   choose: 0
-  health: {fileID: 0}
+  health: {fileID: 285975723}
 --- !u!212 &290412939
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1965,6 +1965,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1373511866}
+  - {fileID: 2139196277}
   - {fileID: 1737533136}
   - {fileID: 66242078}
   m_Father: {fileID: 219102028}
@@ -3015,7 +3016,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026597485}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b16c6f78230fa4964a222622d8aae332, type: 3}
   m_Name: 
@@ -3687,14 +3688,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d229afd3ff63590419cc53910637ff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUI: {fileID: 0}
-  playerHealth: 0
-  enemy: {fileID: 0}
-  magicAttackDamage: 0
-  meleeAttackDamage: 0
+  playerUI: {fileID: 1737533135}
+  playerHealth: 100
+  enemy: {fileID: 2114034643}
+  magicAttackDamage: 70
+  meleeAttackDamage: 50
   playerButtons: []
   choose: 0
-  health: {fileID: 0}
+  health: {fileID: 2118428090}
 --- !u!212 &1373511865
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4579,9 +4580,8 @@ Transform:
   - {fileID: 1566147091}
   - {fileID: 1375956163}
   - {fileID: 2118428089}
-  - {fileID: 2139196277}
   m_Father: {fileID: 739693324}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1815780326
 GameObject:
@@ -4826,6 +4826,7 @@ GameObject:
   - component: {fileID: 1909719888}
   - component: {fileID: 1909719887}
   - component: {fileID: 1909719886}
+  - component: {fileID: 1909719889}
   m_Layer: 0
   m_Name: P2EventSystem
   m_TagString: Untagged
@@ -4851,7 +4852,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
-  m_ForceModuleActive: 1
+  m_ForceModuleActive: 0
 --- !u!114 &1909719887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4882,6 +4883,25 @@ Transform:
   m_Father: {fileID: 2027172851}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1909719889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909719885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: HorizontalP1
+  m_VerticalAxis: VerticalP1
+  m_SubmitButton: P1Choose
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!1 &1943088876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5174,11 +5194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5314546dc2ebc74c898eb9d4a39fa81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyUI: {fileID: 0}
-  enemyHealth: 0
-  players: []
-  magicDamage: 0
-  fightDamage: 0
+  enemyUI: {fileID: 66242077}
+  enemyHealth: 100
+  players:
+  - {fileID: 1373511860}
+  - {fileID: 290412934}
+  magicDamage: 45
+  fightDamage: 100
 --- !u!212 &2114034645
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5358,12 +5380,12 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139196276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 92.10497}
-  m_LocalScale: {x: 0.107397445, y: 0.107397445, z: 0.02147949}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1362618756}
-  m_Father: {fileID: 1737533136}
-  m_RootOrder: 4
+  m_Father: {fileID: 739693324}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
