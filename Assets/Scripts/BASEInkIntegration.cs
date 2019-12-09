@@ -19,6 +19,7 @@ public class BASEInkIntegration : MonoBehaviour
 	[SerializeField] private Canvas textCanvas;
 	[SerializeField] private Canvas buttonCanvas;
 
+	public bool choicesAvailable;
 	private void Start()
 	{
 		story = new Story(_inkJsonAsset.text);
@@ -46,6 +47,7 @@ public class BASEInkIntegration : MonoBehaviour
 	private void Update()
 	{
 		RefreshView();
+		AreChoicesAvailable();
 	}
 
 	void RefreshView(){
@@ -127,7 +129,7 @@ public class BASEInkIntegration : MonoBehaviour
 		// Make the button expand to fit the text
 		HorizontalLayoutGroup layoutGroup = choice.GetComponent <HorizontalLayoutGroup> ();
 		layoutGroup.childForceExpandHeight = false;
-	
+		choicesAvailable = true;
 		return choice;
 	}
     bool playerInput()
@@ -159,12 +161,32 @@ public class BASEInkIntegration : MonoBehaviour
 			Destroy (buttonCanvas.transform.GetChild (i).gameObject);
 		}
 
-
+		choicesAvailable = false;
 
     }
 
 	public Story GetStory()
 	{
 		return story;
+	}
+
+	public bool AreChoicesAvailable()
+	{
+		if(choicesAvailable)
+		{
+			return false;
+		}
+		else if (story.canContinue)
+		{
+			return false;
+		}
+		else if(!choicesAvailable && !story.canContinue)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

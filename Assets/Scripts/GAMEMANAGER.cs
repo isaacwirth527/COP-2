@@ -17,10 +17,12 @@ public class GAMEMANAGER : MonoBehaviour
     public EnemyScript enemyScript;
 	public BASEInkIntegration leftInk;
 	public BASEInkIntegration rightInk;
-    public Story storyLeft;
-    public Story storyRight;
+    public TextAsset JSONLeft;
+    public TextAsset JSONRight;
     public Button buttonPrefab;
     
+    private Story storyLeft;
+    private Story storyRight;
     public bool round1;
     public bool rogueDodge;
     public bool rogueAdv;
@@ -39,8 +41,8 @@ public class GAMEMANAGER : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        storyLeft = leftInk.GetComponent<BASEInkIntegration>().GetStory();
-        storyRight = rightInk.GetComponent<BASEInkIntegration>().GetStory();
+        storyLeft = new Story(JSONLeft.text);
+        storyRight = new Story (JSONRight.text);
         RPGfight.SetActive(false);
         playerRightScript = rightPlayerRPG.GetComponent<PlayerScript>();
         playerLeftScript = leftPlayerRPG.GetComponent<PlayerScript>();
@@ -60,7 +62,7 @@ public class GAMEMANAGER : MonoBehaviour
         p1Brash = (int)storyLeft.variablesState["brash"];
         p2Brash = (int)storyRight.variablesState["brash"];
 
-        if(!storyLeft.canContinue == storyRight.canContinue)
+        if(!storyLeft.canContinue == storyRight.canContinue && leftInk.AreChoicesAvailable() && rightInk.AreChoicesAvailable())
         {
             SceneChange();
             DetermineAttackP1();
