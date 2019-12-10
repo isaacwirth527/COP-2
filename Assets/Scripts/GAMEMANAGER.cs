@@ -20,6 +20,11 @@ public class GAMEMANAGER : MonoBehaviour
 	public BASEInkIntegration rightInk;
     public TextAsset JSONLeft;
     public TextAsset JSONRight;
+    
+	public TextAsset _outcomeOne;
+	public TextAsset _outcomeTwo;
+	public TextAsset _outcomeThree;
+	public TextAsset _outcomeFour;
     public Button buttonPrefabL1, buttonPrefabL2, buttonPrefabL3, buttonPrefabR1, buttonPrefabR2, buttonPrefabR3;
     
     private Story storyLeft;
@@ -33,12 +38,14 @@ public class GAMEMANAGER : MonoBehaviour
 
     public PlayerScript playerLeftScript;
     public PlayerScript playerRightScript;
+    public bool sceneChanged;
     
 	public static int p1Honor, p2Honor, p1Dishonor, p2Dishonor, p1Cunning, p2Cunning, p2Brash, p1Brash;
 
     // Start is called before the first frame update
     void Start()
     {
+        sceneChanged = false;
         storyLeft = new Story(JSONLeft.text);
         storyRight = new Story (JSONRight.text);
         RPGfight.SetActive(false);
@@ -50,6 +57,8 @@ public class GAMEMANAGER : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!RPGNarrativeSwitch())
+        {
         p1Honor = (int)storyLeft.variablesState["honor"];
         //Debug.Log("p1Honor =" + p1Honor);
         p2Honor = (int)storyRight.variablesState["honor"];
@@ -60,8 +69,13 @@ public class GAMEMANAGER : MonoBehaviour
         p2Cunning = (int)storyRight.variablesState["cunning"];
         p1Brash = (int)storyLeft.variablesState["brash"];
         p2Brash = (int)storyRight.variablesState["brash"];
+        }
 
-         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
+         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable()&& !sceneChanged)
+         {
+             RPGNarrativeSwitch();
+         }   
+         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable() && sceneChanged)
          {
             SceneChange();
             DetermineAttackP1();
@@ -73,13 +87,45 @@ public class GAMEMANAGER : MonoBehaviour
        
     }
 
+    public bool RPGNarrativeSwitch()
+    {
+       
+        if(!sceneChanged)
+        {
+            if(p1DetermineHonor() && p2DetermineHonor() )
+            {
+                storyLeft = new Story(_outcomeOne.text);
+                storyRight = new Story(_outcomeOne.text);
+            }
+             if(!p1DetermineHonor() && p2DetermineHonor() )
+            {
+                storyLeft = new Story(_outcomeTwo.text);
+                storyRight = new Story(_outcomeTwo.text);
+            }
+              if(!p1DetermineHonor() && !p2DetermineHonor() )
+            {
+                storyLeft = new Story(_outcomeThree.text);
+                storyRight = new Story(_outcomeThree.text);
+            }
+              if(p1DetermineHonor() && !p2DetermineHonor() )
+            {
+                storyLeft = new Story(_outcomeFour.text);
+                storyRight = new Story(_outcomeFour.text);
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     void SceneChange()
     {
          
         {
             twoStories.SetActive(false);
             RPGfight.SetActive(true);
-            
+            sceneChanged = true;
 
         }
         
