@@ -156,7 +156,7 @@ public class BASEInkIntegration : MonoBehaviour
             {
                  storyImage = RandomGuard;
             }
-        if (text.Contains("Steve"))
+        if (text.Contains("IT"))
             {
                  storyImage = Steve; 
             }
@@ -168,6 +168,22 @@ public class BASEInkIntegration : MonoBehaviour
             {
             storyImage = Hurley; 
             }
+		if (text.Contains("teller"))
+            {
+            storyImage = Teller; 
+            }
+		if (text.Contains("rogue"))
+            {
+            storyImage = ShadyGuy; 
+            }
+		if( text.Contains("Pizard"))
+		{
+			storyImage = Pizard;
+		}
+		if (text.Contains("SleepingLord"))
+		{
+			storyImage = SleepingLord;
+		}
 	}
 	
 	    // Creates a button showing the choice text
