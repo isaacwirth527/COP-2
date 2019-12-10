@@ -46,6 +46,7 @@ public class GAMEMANAGER : MonoBehaviour
     void Start()
     {
         sceneChanged = false;
+         RPGNarrativeSwitch();
         storyLeft = new Story(JSONLeft.text);
         storyRight = new Story (JSONRight.text);
         RPGfight.SetActive(false);
@@ -71,11 +72,11 @@ public class GAMEMANAGER : MonoBehaviour
         p2Brash = (int)storyRight.variablesState["brash"];
         }
 
-         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable()&& !sceneChanged)
-         {
-             RPGNarrativeSwitch();
-         }   
-         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable() && sceneChanged)
+        //  if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable()&& !sceneChanged)
+        //  {
+        //      RPGNarrativeSwitch();
+        //  }   
+         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
          {
             SceneChange();
             DetermineAttackP1();
@@ -96,27 +97,35 @@ public class GAMEMANAGER : MonoBehaviour
             {
                 storyLeft = new Story(_outcomeOne.text);
                 storyRight = new Story(_outcomeOne.text);
+                Debug.Log("Honorable");
             }
              if(!p1DetermineHonor() && p2DetermineHonor() )
             {
                 storyLeft = new Story(_outcomeTwo.text);
                 storyRight = new Story(_outcomeTwo.text);
+                Debug.Log("Not Honorable" + "Honorable");
             }
               if(!p1DetermineHonor() && !p2DetermineHonor() )
             {
                 storyLeft = new Story(_outcomeThree.text);
                 storyRight = new Story(_outcomeThree.text);
+                Debug.Log("Not Honorable");
             }
               if(p1DetermineHonor() && !p2DetermineHonor() )
             {
                 storyLeft = new Story(_outcomeFour.text);
                 storyRight = new Story(_outcomeFour.text);
+                Debug.Log("Not Honorable" + "Not Honorable");
             }
+            Debug.Log("scene changed");
             return true;
+            
         }
         else
         {
+            Debug.Log("rpgnarrativeswitchfalse");
             return false;
+
         }
     }
     void SceneChange()

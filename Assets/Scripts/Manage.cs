@@ -21,8 +21,8 @@ public class Manage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        p1Animator.Play("SpriteFadeIn1");
-        p2Animator.Play("SpriteFadeIn2");
+        // p1Animator.Play("SpriteFadeIn1");
+        // p2Animator.Play("SpriteFadeIn2");
     }
 
     // Update is called once per frame
@@ -33,24 +33,22 @@ public class Manage : MonoBehaviour
 
         if (chosen1 == false && chosen2 == false)
         {
-            p1Animator.Play("SpriteFade1");
-            p1Animator.Play("Player1TurnStart");
-            p2Animator.Play("SpriteFadeOut2");
-            p2Animator.Play("Player2Turn");
+            p1Animator.Play("default", 0);
+            //p1Animator.Play("default");
+            p2Animator.SetTrigger("FadeOut");
+            p2Animator.SetTrigger("PlaceHolderFadeOut");
 
         }
         if(chosen1 && !chosen2)
         {
-            p2Animator.Play("SpriteFadeIn2");
-            p2Animator.Play("Player2TurnStart");
-            p1Animator.Play("SpriteFadeOut1");
-            p1Animator.Play("Player1Turn");
+            p2Animator.Play("default",0 );
+            //p2Animator.Play("Player2TurnStart",1);
+            //p1Animator.Play("SpriteFadeOut1",0);
+            p1Animator.SetTrigger("FadeOut");
+            p1Animator.SetTrigger("PlaceHolderFadeOut");
             player1.gameObject.SetActive(false);
 
         }
-
-
-
         if (chosen1 == chosen2 && chosen2 == true )
         {
             player2.gameObject.SetActive(false);
