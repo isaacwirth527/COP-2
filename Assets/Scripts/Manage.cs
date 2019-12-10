@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Manage : MonoBehaviour
 {
     public GameObject enemy;
-    public GameObject player1;
-    public GameObject player2;
+    public PlayerScript player1;
+    public PlayerScript player2;
     bool chosen1;
     bool chosen2;
     public int turnCounter;
@@ -28,8 +28,8 @@ public class Manage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        chosen1 = player1.GetComponent<PlayerScript>().choose;
-        chosen2 = player2.GetComponent<PlayerScript>().choose;
+        chosen1 = player1.choose;
+        chosen2 = player2.choose;
 
         if (chosen1 == false && chosen2 == false)
         {
@@ -45,7 +45,7 @@ public class Manage : MonoBehaviour
             p2Animator.Play("Player2TurnStart");
             p1Animator.Play("SpriteFadeOut1");
             p1Animator.Play("Player1Turn");
-            player1.SetActive(false);
+            player1.gameObject.SetActive(false);
 
         }
 
@@ -53,15 +53,15 @@ public class Manage : MonoBehaviour
 
         if (chosen1 == chosen2 && chosen2 == true )
         {
-            player2.SetActive(false);
+            player2.gameObject.SetActive(false);
             enemy.GetComponent<EnemyScript>().enemyAttack();
             Debug.Log("Enemy attacked!");
             Debug.Log("Waiting");
             
             //StartCoroutine(waitFalse());
             SetBothFalse();
-            player1.SetActive(true);
-            player2.SetActive(true);
+            player1.gameObject.SetActive(true);
+            player2.gameObject.SetActive(true);
 
         }
     }

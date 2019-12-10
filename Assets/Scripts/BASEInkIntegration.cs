@@ -4,9 +4,11 @@ using System.Collections;
 using Ink.Runtime;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class BASEInkIntegration : MonoBehaviour
+
 {
 	[SerializeField] private TextAsset _inkJsonAsset;
 	[SerializeField] private Story story;
@@ -19,8 +21,30 @@ public class BASEInkIntegration : MonoBehaviour
 	[SerializeField] private Canvas textCanvas;
 	[SerializeField] private Canvas buttonCanvas;
 
+	public InputScript inputScript;
+	public bool buttonsExist;
+
+	public GAMEMANAGER gm;
+	public Button[] buttons;
+	public bool choicesAvailable;
+	public bool stopButtonsPlease;
+
+	public Sprite Mac;
+    public Sprite RandomGuard;
+    public Sprite Hurley;
+    public Sprite Kraglin;
+    public Sprite Pizard; 
+    public Sprite RandomNPC;
+    public Sprite SleepingLord;
+    public Sprite ShadyGuy;
+    public Sprite Teller;
+    public Sprite Steve; 
+    public SpriteRenderer spriteRenderer;
+    public Sprite storyImage;
 	private void Start()
 	{
+		stopButtonsPlease = false;
+		buttonsExist = false;
 		story = new Story(_inkJsonAsset.text);
 		RemoveChildren();
 		var text = story.Continue();
@@ -37,18 +61,28 @@ public class BASEInkIntegration : MonoBehaviour
                     OnClickChoiceButton(choice);
                 });
                 button.Select();
+				//buttons[i] = button;
             }
-         
+
         }
 		CreateContentView(text);
 	}
 
 	private void Update()
 	{
+		spriteRenderer.sprite = storyImage;
 		RefreshView();
+		if(choicesAvailable)
+		{
+			for (int i = 0; i < buttons.Length; i++)
+			{
+				 inputScript.buttons[i] = buttons[i];
+			}
+		}
 	}
 
-	void RefreshView(){
+	void RefreshView()
+	{
 
         if (!playerInput()) return;
 				
@@ -78,7 +112,8 @@ public class BASEInkIntegration : MonoBehaviour
 				button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choice);
 				});
-				button.Select();
+				button.Select();				
+				inputScript.buttons[i] = button;
 			}
 		}
 
@@ -91,18 +126,18 @@ public class BASEInkIntegration : MonoBehaviour
 		RemoveChildren();
 		var text = story.Continue();
 		var choiceText = "";
-
-		
 		if (story.currentChoices.Count > 0)
 		{
 			for (var i = 0; i < story.currentChoices.Count; i++) {
 				Choice choices = story.currentChoices [i];
 				Button button = CreateChoiceView (choices.text.Trim ());
+				Debug.Log("Button should be in inspector");
 				button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choices);
 				});
 				button.Select();
-			}		
+				
+			}	
 		}
 		CreateContentView(text);
 	}
@@ -112,6 +147,27 @@ public class BASEInkIntegration : MonoBehaviour
 		var storyText = Instantiate(textPrefab);
 		storyText.text = text;
 		storyText.transform.SetParent (textCanvas.transform, false);
+
+		if (text.Contains("Mac"))
+            {
+                 storyImage = Mac; 
+            }
+        if (text.Contains("Guard"))
+            {
+                 storyImage = RandomGuard;
+            }
+        if (text.Contains("Steve"))
+            {
+                 storyImage = Steve; 
+            }
+        if (text.Contains("Kraglin"))
+            {
+                storyImage = Kraglin; 
+            }
+        if (text.Contains("Hurley"))
+            {
+            storyImage = Hurley; 
+            }
 	}
 	
 	    // Creates a button showing the choice text
@@ -127,7 +183,8 @@ public class BASEInkIntegration : MonoBehaviour
 		// Make the button expand to fit the text
 		HorizontalLayoutGroup layoutGroup = choice.GetComponent <HorizontalLayoutGroup> ();
 		layoutGroup.childForceExpandHeight = false;
-	
+		choicesAvailable = true;
+		buttonsExist = true;
 		return choice;
 	}
     bool playerInput()
@@ -149,7 +206,9 @@ public class BASEInkIntegration : MonoBehaviour
 
 
     }
-    void RemoveChildren () {
+
+    void RemoveChildren () 
+	{
 		int childCount = textCanvas.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
 			Destroy (textCanvas.transform.GetChild (i).gameObject);
@@ -158,13 +217,43 @@ public class BASEInkIntegration : MonoBehaviour
 		for (int i = buttonChildCount - 1; i >= 0; --i) {
 			Destroy (buttonCanvas.transform.GetChild (i).gameObject);
 		}
-
-
+		buttonsExist = false;
+		choicesAvailable = false;
 
     }
 
 	public Story GetStory()
 	{
 		return story;
+	}
+
+	public bool AreChoicesAvailable()
+	{
+			if(choicesAvailable)
+			{
+				return true;
+			}
+			else if(!choicesAvailable && !story.canContinue)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+	
+	}
+
+	void PlayerInputManager(Button button1, Button button2)
+	{
+		if(Input.GetAxis("P2Horizontal") > 0)
+		{
+			button2.Select();
+		}
+			if(Input.GetAxis("P2Horizontal") < 0)
+		{
+			button1.Select();
+		}
+
 	}
 }

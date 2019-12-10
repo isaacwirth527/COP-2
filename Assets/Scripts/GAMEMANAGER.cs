@@ -5,6 +5,7 @@ using Ink.Runtime;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 public class GAMEMANAGER : MonoBehaviour
 {
     public GameObject RPGfight;
@@ -17,10 +18,12 @@ public class GAMEMANAGER : MonoBehaviour
     public EnemyScript enemyScript;
 	public BASEInkIntegration leftInk;
 	public BASEInkIntegration rightInk;
-    public Story storyLeft;
-    public Story storyRight;
-    public Button buttonPrefab;
+    public TextAsset JSONLeft;
+    public TextAsset JSONRight;
+    public Button buttonPrefabL1, buttonPrefabL2, buttonPrefabL3, buttonPrefabR1, buttonPrefabR2, buttonPrefabR3;
     
+    private Story storyLeft;
+    private Story storyRight;
     public bool round1;
     public bool rogueDodge;
     public bool rogueAdv;
@@ -30,29 +33,27 @@ public class GAMEMANAGER : MonoBehaviour
 
     public PlayerScript playerLeftScript;
     public PlayerScript playerRightScript;
-
-    public Button[] playerLeftButtons;
-    public Button[] playerRightButtons;
     
 	public static int p1Honor, p2Honor, p1Dishonor, p2Dishonor, p1Cunning, p2Cunning, p2Brash, p1Brash;
 
     // Start is called before the first frame update
     void Start()
     {
-        storyLeft = leftInk.GetComponent<BASEInkIntegration>().GetStory();
-        storyRight = rightInk.GetComponent<BASEInkIntegration>().GetStory();
+        storyLeft = new Story(JSONLeft.text);
+        storyRight = new Story (JSONRight.text);
         RPGfight.SetActive(false);
         playerRightScript = rightPlayerRPG.GetComponent<PlayerScript>();
         playerLeftScript = leftPlayerRPG.GetComponent<PlayerScript>();
+        controlRPGButtons(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         p1Honor = (int)storyLeft.variablesState["honor"];
-        Debug.Log("p1Honor =" + p1Honor);
+        //Debug.Log("p1Honor =" + p1Honor);
         p2Honor = (int)storyRight.variablesState["honor"];
-        Debug.Log("p2Honor =" + p2Honor);
+        //Debug.Log("p2Honor =" + p2Honor);
         p1Dishonor = (int)storyLeft.variablesState["dishonor"];
         p2Dishonor = (int)storyRight.variablesState["dishonor"];
         p1Cunning = (int)storyLeft.variablesState["cunning"];
@@ -60,133 +61,96 @@ public class GAMEMANAGER : MonoBehaviour
         p1Brash = (int)storyLeft.variablesState["brash"];
         p2Brash = (int)storyRight.variablesState["brash"];
 
-        if(!storyLeft.canContinue == storyRight.canContinue)
-        {
+         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
+         {
             SceneChange();
             DetermineAttackP1();
             DetermineAttackP2();
-        }
+            controlRPGButtons(true);
+            
+            
+         }
+       
     }
 
     void SceneChange()
     {
-        twoStories.SetActive(false);
-        RPGfight.SetActive(true);
+         
+        {
+            twoStories.SetActive(false);
+            RPGfight.SetActive(true);
+            
+
+        }
+        
 
     }
 
-    void DetermineAttackP1()
-    {
-        if (p1Cunning > p1Brash)
-        {
-            if(round1)
-            {
-                sneakAttack();
-            }
-            else
-            {
-                stab();
-            }
-            dodge();
-            distract();
-        }
-        else
-        {
-            goLow();
-            standardAttack();
-            knifeThrow();
-                    
-         }
-    }
-        void DetermineAttackP2()
-    {
-        if (p2Cunning > p2Brash)
-        {
-            feint();
-            standardAttack();
-            disarm();
-        }
-        else
-        {
-            charge();
-            standardAttack();
-            goHigh();
-                    
-         }
-    }
+
 
    
-    public Button sneakAttack()
-    {   Button newButton = Instantiate(buttonPrefab);
+    public Button sneakAttack(Button newButton)
+    {  
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Sneak Attack";
         newButton.onClick.AddListener(()=>damageR(20));
         return newButton;
     }
   
-    public Button stab()
+    public Button stab(Button newButton)
     {
-    	Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Stab";
         newButton.onClick.AddListener(()=>damageR(10));
         return newButton;
     }
 
-    public Button dodge()
+    public Button dodge(Button newButton)
     {
-        
-    	Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Dodge";
         newButton.onClick.AddListener(()=>damageR(0));
         newButton.onClick.AddListener(setDodge);
         return newButton;
     }
 
-    public Button distract()
+    public Button distract(Button newButton)
     {
-    	Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Distract";
         newButton.onClick.AddListener(()=>damageR(0));
         newButton.onClick.AddListener(setWarriorAdv);
         return newButton;
     }
 
-    public Button feint()
+    public Button feint(Button newButton)
     {
-        Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Feint";
         newButton.onClick.AddListener(()=>damageW(15));
         return newButton;
     }
 
-    public bool standardAttack()
+    public Button standardAttack(Button newButton)
     {
-        Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Attack";
         newButton.onClick.AddListener(()=>damageW(10));
         return newButton;
     }
 
-    public Button disarm()
+    public Button disarm(Button newButton)
     {
-        Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Distract";
         newButton.onClick.AddListener(()=>damageW(0));
         newButton.onClick.AddListener(setRogueAdv);
         return newButton;
     }
 
-    public Button goLow()
-	{
-        Button newButton = Instantiate(buttonPrefab);
-        newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Go Low";
+     public Button goLow(Button newButton)
+	 {
+         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Go Low";
         newButton.onClick.AddListener(()=>damageR(15));
-        newButton.onClick.AddListener(setWarriorAdv);
+         newButton.onClick.AddListener(setWarriorAdv);
         return newButton;
-    }
+     }
 
-    public Button knifeThrow()
+    public Button knifeThrow(Button newButton)
     {
-        Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Throw Knife";
     	int randomInt = Random.Range(0, 2);
     		if(randomInt == 1)
@@ -201,17 +165,15 @@ public class GAMEMANAGER : MonoBehaviour
             return newButton;
     }
 
-    public Button charge()
+    public Button charge(Button newButton)
     {
-    	Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Charge";
         newButton.onClick.AddListener(()=>damageW(15));
         return newButton;
     }
 
-    public Button goHigh()
+    public Button goHigh(Button newButton)
     {
-    	Button newButton = Instantiate(buttonPrefab);
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Go High";
         newButton.onClick.AddListener(()=>damageW(15));
         newButton.onClick.AddListener(setRogueAdv);
@@ -275,6 +237,59 @@ public class GAMEMANAGER : MonoBehaviour
             return false;
         }
   
+    }
+        public void DetermineAttackP1()
+    {
+        if (p1Cunning > p1Brash)
+        {
+            
+            if(round1)
+            {
+                sneakAttack(buttonPrefabL1);
+            }
+            else
+            {
+               stab(buttonPrefabL1);
+            }
+           dodge(buttonPrefabL2);
+           distract(buttonPrefabL3);
+        }
+        else
+        {
+            goLow(buttonPrefabL1);
+            standardAttack(buttonPrefabL2);
+            knifeThrow(buttonPrefabL3);
+                    
+         }
+    }
+       public void DetermineAttackP2()
+    {
+        if (p2Cunning > p2Brash)
+        {
+            feint(buttonPrefabR1);
+            standardAttack(buttonPrefabR2);
+            disarm(buttonPrefabR3);
+        }
+        else
+        {
+            charge(buttonPrefabR1);
+            standardAttack(buttonPrefabR2);
+            goHigh(buttonPrefabR3);
+                    
+         }
+    }
+
+    public void controlRPGButtons(bool active)
+    {
+     
+            
+            buttonPrefabL1.gameObject.SetActive(active);
+            buttonPrefabL2.gameObject.SetActive(active);
+            buttonPrefabL3.gameObject.SetActive(active);
+            buttonPrefabR1.gameObject.SetActive(active);
+            buttonPrefabR2.gameObject.SetActive(active);
+            buttonPrefabR3.gameObject.SetActive(active);
+       
     }
 }
 
