@@ -16,6 +16,8 @@ public class Manage : MonoBehaviour
     public Animator p1Animator;
     public Animator p2Animator;
     
+    public GameObject decorativeP2onLeft;
+    public GameObject decorativeP1onRight;
 
 
     // Start is called before the first frame update
@@ -35,9 +37,15 @@ public class Manage : MonoBehaviour
         {
            // p2Animator.Play("default", 0);
             //p1Animator.Play("default",1);
-            p1Animator.SetTrigger("FadeIn1");
+            //p1Animator.SetTrigger("FadeO");
            // p2Animator.SetTrigger("PlaceHolderFadeOut");
-            p1Animator.SetTrigger("PlaceHolderFadeOut");
+            //p1Animator.SetTrigger("PlaceHolderFadeOut");
+            //p2Animator.SetTrigger("PlaceHolderFadeOut");
+            decorativeP1onRight.gameObject.SetActive(false);
+            p2Choose.gameObject.SetActive(false);
+            p1Choose.gameObject.SetActive(true);
+            decorativeP2onLeft.gameObject.SetActive(true);
+
             //player2.gameObject.SetActive(false);
 
         }
@@ -49,7 +57,11 @@ public class Manage : MonoBehaviour
             //p1Animator.Play("SpriteFadeOut1",0);
             //p1Animator.SetTrigger("FadeOut");
             //p2Animator.SetTrigger("PlaceHolderFadeOut");
-            //player1.gameObject.SetActive(false);
+            player1.gameObject.SetActive(false);
+            p2Choose.gameObject.SetActive(true);
+            p1Choose.gameObject.SetActive(false);
+            decorativeP2onLeft.gameObject.SetActive(false);
+            decorativeP1onRight.gameObject.SetActive(true);
 
         }
         if (chosen1 == chosen2 && chosen2 == true )
