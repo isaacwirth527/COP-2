@@ -33,18 +33,19 @@ public class Manage : MonoBehaviour
 
         if (chosen1 == false && chosen2 == false)
         {
-            p1Animator.Play("SpriteFadeIn1", 0);
-            p1Animator.Play("Player1TurnStart", 1);
-            p2Animator.Play("SpriteFadeOut2", 0);
-            p2Animator.Play("Player2TurnEnd", 1);
+            p1Animator.Play("default", 0);
+            //p1Animator.Play("default");
+            p2Animator.SetTrigger("FadeOut");
+            p2Animator.SetTrigger("PlaceHolderFadeOut");
 
         }
         if(chosen1 && !chosen2)
         {
-            p2Animator.Play("SpriteFadeIn2",0 );
-            p2Animator.Play("Player2TurnStart",1);
-            p1Animator.Play("SpriteFadeOut1",0);
-            p1Animator.Play("Player1TurnEnd",1);
+            p2Animator.Play("default",0 );
+            //p2Animator.Play("Player2TurnStart",1);
+            //p1Animator.Play("SpriteFadeOut1",0);
+            p1Animator.SetTrigger("FadeOut");
+            p1Animator.SetTrigger("PlaceHolderFadeOut");
             player1.gameObject.SetActive(false);
 
         }
