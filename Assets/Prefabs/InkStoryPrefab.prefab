@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &889859266884146085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 889859266884146086}
+  - component: {fileID: 889859266884146087}
+  m_Layer: 0
+  m_Name: NEW Left Ink
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &889859266884146086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889859266884146085}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -413, y: -232.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &889859266884146087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889859266884146085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee366d4f16a3c984c976d70002f20ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inkJsonAsset: {fileID: 4900000, guid: 9caa4cab46f08744ebd321e822c69e23, type: 3}
+  textPrefab: {fileID: 11456674, guid: 1aab6ef84d87c416f8f0b3e1ef3d77d2, type: 3}
+  buttonPrefab: {fileID: 11455116, guid: 37c108a6c38964f79a6621eccb33ddc1, type: 3}
+  textCanvas: {fileID: 0}
+  buttonCanvas: {fileID: 0}
+  inputScript: {fileID: 0}
+  buttonsExist: 0
+  gm: {fileID: 0}
+  buttons: []
+  choicesAvailable: 0
+  stopButtonsPlease: 0
+  Mac: {fileID: 21300000, guid: 12bc751b88a9d4543b296220608fd164, type: 3}
+  RandomGuard: {fileID: 21300000, guid: 725e9c1c0bb3bd54abfe58f183ce3319, type: 3}
+  Hurley: {fileID: 21300000, guid: d924ea1510d87114bbd9139901ec756d, type: 3}
+  Kraglin: {fileID: 21300000, guid: d2efc8cc3e241c747b8803b6d127c143, type: 3}
+  Pizard: {fileID: 21300000, guid: b37d655cc3fced74aa07f74e127aad08, type: 3}
+  RandomNPC: {fileID: 21300000, guid: 03196fe2ba37ba14a89d4bed1a364bef, type: 3}
+  SleepingLord: {fileID: 21300000, guid: d20a2ec1b6ed2ca479f9c958ae89bad1, type: 3}
+  ShadyGuy: {fileID: 21300000, guid: 03196fe2ba37ba14a89d4bed1a364bef, type: 3}
+  Teller: {fileID: 21300000, guid: d7e52fe1008cfbd4c9a78a196fcafbfd, type: 3}
+  Steve: {fileID: 21300000, guid: 32ade0de58bcc4b41861039a1b62cb84, type: 3}
+  spriteRenderer: {fileID: 0}
+  storyImage: {fileID: 0}

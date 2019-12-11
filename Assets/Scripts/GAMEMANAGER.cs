@@ -21,12 +21,8 @@ public class GAMEMANAGER : MonoBehaviour
     public TextAsset JSONLeft;
     public TextAsset JSONRight;
     
-	public TextAsset _outcomeOne;
-	public TextAsset _outcomeTwo;
-	public TextAsset _outcomeThree;
-	public TextAsset _outcomeFour;
     public Button buttonPrefabL1, buttonPrefabL2, buttonPrefabL3, buttonPrefabR1, buttonPrefabR2, buttonPrefabR3;
-    
+    public bool switchScene;
     private Story storyLeft;
     private Story storyRight;
     public bool round1;
@@ -35,18 +31,26 @@ public class GAMEMANAGER : MonoBehaviour
     public bool warriorAdv;
     public bool enemyAdv;
     public EnemyScript enemy;
-
+    public GameObject[] LeftHonorOutcomes;
+    public GameObject[] RightHonorOutcomes;
     public PlayerScript playerLeftScript;
     public PlayerScript playerRightScript;
     public bool sceneChanged;
+
+    BASEInkIntegration currentLeftStory;
+    BASEInkIntegration currentRightStory;
     
 	public static int p1Honor, p2Honor, p1Dishonor, p2Dishonor, p1Cunning, p2Cunning, p2Brash, p1Brash;
 
     // Start is called before the first frame update
     void Start()
     {
+        // for(int i = 0; i < LeftHonorOutcomes.Length; i++)
+        // {
+        //     LeftHonorOutcomes[i].SetActive(false);
+        //     RightHonorOutcomes[i].SetActive(false);
+        // }
         sceneChanged = false;
-         RPGNarrativeSwitch();
         storyLeft = new Story(JSONLeft.text);
         storyRight = new Story (JSONRight.text);
         RPGfight.SetActive(false);
@@ -58,8 +62,6 @@ public class GAMEMANAGER : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!RPGNarrativeSwitch())
-        {
         p1Honor = (int)storyLeft.variablesState["honor"];
         //Debug.Log("p1Honor =" + p1Honor);
         p2Honor = (int)storyRight.variablesState["honor"];
@@ -70,13 +72,13 @@ public class GAMEMANAGER : MonoBehaviour
         p2Cunning = (int)storyRight.variablesState["cunning"];
         p1Brash = (int)storyLeft.variablesState["brash"];
         p2Brash = (int)storyRight.variablesState["brash"];
-        }
 
-        //  if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable()&& !sceneChanged)
-        //  {
-        //      RPGNarrativeSwitch();
-        //  }   
-         if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable())
+       if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable()&& !sceneChanged)
+          {
+               RPGNarrativeSwitch();
+          }  
+
+         if(!currentLeftStory.AreChoicesAvailable() && !currentRightStory.AreChoicesAvailable())
          {
             SceneChange();
             DetermineAttackP1();
@@ -93,30 +95,41 @@ public class GAMEMANAGER : MonoBehaviour
        
         if(!sceneChanged)
         {
+           leftInk.gameObject.SetActive(false);
+           rightInk.gameObject.SetActive(false);
             if(p1DetermineHonor() && p2DetermineHonor() )
             {
-                storyLeft = new Story(_outcomeOne.text);
-                storyRight = new Story(_outcomeOne.text);
+                LeftHonorOutcomes[0].SetActive(true);
+                RightHonorOutcomes[0].SetActive(true);
+                currentLeftStory = LeftHonorOutcomes[0].GetComponent<BASEInkIntegration>();
+                currentRightStory = RightHonorOutcomes[0].GetComponent<BASEInkIntegration>();
                 Debug.Log("Honorable");
             }
              if(!p1DetermineHonor() && p2DetermineHonor() )
             {
-                storyLeft = new Story(_outcomeTwo.text);
-                storyRight = new Story(_outcomeTwo.text);
+                LeftHonorOutcomes[1].SetActive(true);
+                RightHonorOutcomes[1].SetActive(true);
+                currentLeftStory = LeftHonorOutcomes[1].GetComponent<BASEInkIntegration>();
+                currentRightStory = RightHonorOutcomes[1].GetComponent<BASEInkIntegration>();
                 Debug.Log("Not Honorable" + "Honorable");
             }
               if(!p1DetermineHonor() && !p2DetermineHonor() )
             {
-                storyLeft = new Story(_outcomeThree.text);
-                storyRight = new Story(_outcomeThree.text);
+                LeftHonorOutcomes[2].SetActive(true);
+                RightHonorOutcomes[2].SetActive(true);
+                currentLeftStory = LeftHonorOutcomes[2].GetComponent<BASEInkIntegration>();
+                currentRightStory = RightHonorOutcomes[2].GetComponent<BASEInkIntegration>();
                 Debug.Log("Not Honorable");
             }
               if(p1DetermineHonor() && !p2DetermineHonor() )
             {
-                storyLeft = new Story(_outcomeFour.text);
-                storyRight = new Story(_outcomeFour.text);
+                LeftHonorOutcomes[3].SetActive(true);
+                RightHonorOutcomes[3].SetActive(true);
+                currentLeftStory = LeftHonorOutcomes[3].GetComponent<BASEInkIntegration>();
+                currentRightStory = RightHonorOutcomes[3].GetComponent<BASEInkIntegration>();
                 Debug.Log("Not Honorable" + "Not Honorable");
             }
+            switchScene = true;
             Debug.Log("scene changed");
             return true;
             
