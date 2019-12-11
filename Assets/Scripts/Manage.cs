@@ -19,6 +19,8 @@ public class Manage : MonoBehaviour
     public GameObject decorativeP2onLeft;
     public GameObject decorativeP1onRight;
 
+    public GameObject leftPlayerDummy;
+
 
     // Start is called before the first frame update
     void Start()
@@ -41,9 +43,11 @@ public class Manage : MonoBehaviour
            // p2Animator.SetTrigger("PlaceHolderFadeOut");
             //p1Animator.SetTrigger("PlaceHolderFadeOut");
             //p2Animator.SetTrigger("PlaceHolderFadeOut");
+            
             decorativeP1onRight.gameObject.SetActive(false);
             p2Choose.gameObject.SetActive(false);
             p1Choose.gameObject.SetActive(true);
+            leftPlayerDummy.gameObject.SetActive(false);
             decorativeP2onLeft.gameObject.SetActive(true);
 
             //player2.gameObject.SetActive(false);
@@ -57,6 +61,7 @@ public class Manage : MonoBehaviour
             //p1Animator.Play("SpriteFadeOut1",0);
             //p1Animator.SetTrigger("FadeOut");
             //p2Animator.SetTrigger("PlaceHolderFadeOut");
+            leftPlayerDummy.gameObject.SetActive(true);
             player1.gameObject.SetActive(false);
             p2Choose.gameObject.SetActive(true);
             p1Choose.gameObject.SetActive(false);
