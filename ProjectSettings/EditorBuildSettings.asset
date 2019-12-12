@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 0
+    path: Assets/Scenes/RPG Fight.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 871c2d6c8eb2492428a40e9357634671
+  - enabled: 1
+    path: Assets/Scenes/Inky.unity
+    guid: 5d0c0a6dc0a7236448e6c26720628d55
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 20bc8b45df8d562459f7db389f6fad39,
       type: 2}

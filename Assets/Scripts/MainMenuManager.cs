@@ -14,11 +14,14 @@ public class MainMenuManager : MonoBehaviour
     public Button StartButton2;
     public TextMeshProUGUI DescText; 
     public TextMeshProUGUI DescText2;
+
+    public bool p1Text;
+    public bool p2Text;
     // Start is called before the first frame update
     void Start()
     {
-        DescText.text = "";
-        DescText2.text = "";
+        DescText.text = "Controls: WASD + Space";
+        DescText2.text = "Controls: B + Joystick";
         StartButton.Select();
         StartButton2.Select();
         //StartButton.SetActive(true);
@@ -27,18 +30,45 @@ public class MainMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetButton("P1Choose"))
+        {
+            OnSwitchP1();
+        }
+        if(Input.GetButton("P2Choose"))
+        {
+            OnSwitchP2();
+        }
+        if(p1Text && p2Text)
+        {
+            StartCoroutine(wait3Sec());
+            
+        }
     }
 
-    public void OnSwitch()
+    public void OnSwitchP1()
     {
+    
+    
       TitleText.text = "";
-      TitleText2.text = "";
       StartButton.GetComponentInChildren<Text>().text = "";
-      StartButton2.GetComponentInChildren<Text>().text = "";
       DescText.text = "Welcome to my twisted mind!";
-      DescText2.text = "Welcome to my twisted mind!";
+      p1Text = true;
+    
+    }
 
+    public void OnSwitchP2()
+    {
+      TitleText2.text = "";
+      StartButton2.GetComponentInChildren<Text>().text = "";
+      DescText2.text = "Welcome to my twisted mind!";
+      p2Text = true;
+      
+    }
+
+    IEnumerator wait3Sec()
+    {
+        yield return new WaitForSeconds(3.0f);
+        SceneManager.LoadScene("Inky");
     }
 
  
