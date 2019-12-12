@@ -61,7 +61,7 @@ public class MainMenuManager : MonoBehaviour
     
       TitleText.text = "";
       StartButton.GetComponentInChildren<Text>().text = "";
-        //StartButton.SetActive(false);
+        StartButton.gameObject.SetActive(false);
         StartButton.enabled = false;  
       DescText.text = "Welcome to my twisted mind! I'm so sorry. " +
                       "Anyway my name is, unimportant. Please, choose your class among yourselves." +
@@ -77,6 +77,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnSwitchP2()
     {
       TitleText2.text = "";
+      StartButton2.gameObject.SetActive(false);
       StartButton2.GetComponentInChildren<Text>().text = "";
         StartButton2.enabled = false; 
       DescText2.text = "Welcome to my twisted mind! I'm so sorry. " +

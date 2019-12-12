@@ -39,10 +39,14 @@ public class GAMEMANAGER : MonoBehaviour
 
     public GameObject pizard;
     public GameObject shadyGuy;
-    public GameObject enemyClone;
+    public GameObject pizardClone;
+    public GameObject shadyGuyClone;
     public bool pizardOn;
     public bool RPGFightTime;
-
+    public Slider leftEnemyHealth;
+    public Slider rightEnemyHealth;
+    public AudioSource novelMusic;
+    public AudioSource fightMusic;
     BASEInkIntegration currentLeftStory;
     BASEInkIntegration currentRightStory;
     
@@ -62,11 +66,15 @@ public class GAMEMANAGER : MonoBehaviour
         playerLeftScript = leftPlayerRPG.GetComponent<PlayerScript>();
         controlRPGButtons(false);
         pizardOn = false;
+        pizardClone.gameObject.SetActive(false);
+        shadyGuyClone.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(leftInk.AreChoicesAvailable() && rightInk.AreChoicesAvailable())
+        {
         p1Honor = (int)storyLeft.variablesState["honor"];
         //Debug.Log("p1Honor =" + p1Honor);
         p2Honor = (int)storyRight.variablesState["honor"];
@@ -77,6 +85,7 @@ public class GAMEMANAGER : MonoBehaviour
         p2Cunning = (int)storyRight.variablesState["cunning"];
         p1Brash = (int)storyLeft.variablesState["brash"];
         p2Brash = (int)storyRight.variablesState["brash"];
+        }
 
        if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable()&& !sceneChanged)
           {
@@ -90,6 +99,9 @@ public class GAMEMANAGER : MonoBehaviour
             DetermineAttackP2();
             controlRPGButtons(true);
             RPGFightTime = true;
+            rightEnemyHealth.value = leftEnemyHealth.value;
+            novelMusic.gameObject.SetActive(false);
+            fightMusic.gameObject.SetActive(true);
             
          }
        
@@ -162,14 +174,14 @@ public class GAMEMANAGER : MonoBehaviour
             {
                enemyObject = pizard;
                pizard.SetActive(true);
-               enemyClone = pizard;
+               pizardClone.SetActive(true);
 
             }
             else
             {
                 enemyObject = shadyGuy;
                 shadyGuy.SetActive(true);
-                enemyClone = shadyGuy;
+                shadyGuyClone.SetActive(true);
             }
     }
         
