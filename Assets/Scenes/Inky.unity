@@ -1973,7 +1973,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489877614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.164, y: 0, z: 0}
+  m_LocalPosition: {x: 0.164, y: 0, z: 50}
   m_LocalScale: {x: 0.6127704, y: 0.6127704, z: 0.6127704}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4612,7 +4612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170234108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.164, y: 0, z: 0}
+  m_LocalPosition: {x: 0.164, y: 0, z: 50}
   m_LocalScale: {x: 0.6127704, y: 0.6127704, z: 0.6127704}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7339,6 +7339,7 @@ MonoBehaviour:
   shadyGuy: {fileID: 425708359}
   enemyClone: {fileID: 0}
   pizardOn: 0
+  RPGFightTime: 0
 --- !u!4 &2033568790
 Transform:
   m_ObjectHideFlags: 0
