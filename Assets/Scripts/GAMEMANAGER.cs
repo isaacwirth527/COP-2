@@ -41,6 +41,7 @@ public class GAMEMANAGER : MonoBehaviour
     public GameObject shadyGuy;
     public GameObject enemyClone;
     public bool pizardOn;
+    public bool RPGFightTime;
 
     BASEInkIntegration currentLeftStory;
     BASEInkIntegration currentRightStory;
@@ -50,7 +51,7 @@ public class GAMEMANAGER : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        RPGFightTime = false;
 
         enemyObject = shadyGuy;
         sceneChanged = false;
@@ -88,7 +89,7 @@ public class GAMEMANAGER : MonoBehaviour
             DetermineAttackP1();
             DetermineAttackP2();
             controlRPGButtons(true);
-            
+            RPGFightTime = true;
             
          }
        
