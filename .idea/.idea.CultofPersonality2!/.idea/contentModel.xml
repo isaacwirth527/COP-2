@@ -109,8 +109,11 @@
           <e p="GAMEMANAGER.cs" t="Include" />
           <e p="Incidents.cs" t="Include" />
           <e p="InputScript.cs" t="Include" />
+          <e p="MainMenuManager.cs" t="Include" />
           <e p="Manage.cs" t="Include" />
+          <e p="MusicManager.cs" t="Include" />
           <e p="PlayerScript.cs" t="Include" />
+          <e p="SceneSwitch.cs" t="Include" />
           <e p="SM.cs" t="Include" />
           <e p="SpriteManager.cs" t="Include" />
         </e>

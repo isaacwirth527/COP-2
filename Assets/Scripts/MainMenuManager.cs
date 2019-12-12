@@ -51,7 +51,7 @@ public class MainMenuManager : MonoBehaviour
     
       TitleText.text = "";
       StartButton.GetComponentInChildren<Text>().text = "";
-      DescText.text = "Welcome to my twisted mind!";
+      DescText.text = "Welcome to my twisted mind! I'm so sorry.";
       p1Text = true;
     
     }
