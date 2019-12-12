@@ -11,7 +11,7 @@ public class BASEInkIntegration : MonoBehaviour
 
 {
 	[SerializeField] private TextAsset _inkJsonAsset;
-	[SerializeField] private Story story;
+	[SerializeField] public Story story;
 	
 	// UI Prefabs
 	[SerializeField] private Text textPrefab;

@@ -1598,7 +1598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUI: {fileID: 23955500}
   playerHealth: 100
-  enemy: {fileID: 0}
+  enemy: {fileID: 425708359}
   magicAttackDamage: 75
   meleeAttackDamage: 40
   playerButtons: []
@@ -5334,7 +5334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUI: {fileID: 1737533135}
   playerHealth: 100
-  enemy: {fileID: 0}
+  enemy: {fileID: 425708359}
   magicAttackDamage: 70
   meleeAttackDamage: 50
   playerButtons: []
@@ -7793,6 +7793,14 @@ MonoBehaviour:
   rightEnemyHealth: {fileID: 1655099611}
   novelMusic: {fileID: 650930502}
   fightMusic: {fileID: 1281499090}
+  p1Honor: 0
+  p2Honor: 0
+  p1Dishonor: 0
+  p2Dishonor: 0
+  p1Cunning: 0
+  p2Cunning: 0
+  p2Brash: 0
+  p1Brash: 0
 --- !u!4 &2033568790
 Transform:
   m_ObjectHideFlags: 0

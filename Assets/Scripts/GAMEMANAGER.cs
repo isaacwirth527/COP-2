@@ -50,17 +50,17 @@ public class GAMEMANAGER : MonoBehaviour
     BASEInkIntegration currentLeftStory;
     BASEInkIntegration currentRightStory;
     
-	public static int p1Honor, p2Honor, p1Dishonor, p2Dishonor, p1Cunning, p2Cunning, p2Brash, p1Brash;
+	public int p1Honor, p2Honor, p1Dishonor, p2Dishonor, p1Cunning, p2Cunning, p2Brash, p1Brash;
 
     // Start is called before the first frame update
     void Start()
     {
+        //p1Honor = 5;
         RPGFightTime = false;
-
+        currentLeftStory = leftInk;
+        currentRightStory = rightInk;
         enemyObject = shadyGuy;
         sceneChanged = false;
-        storyLeft = new Story(JSONLeft.text);
-        storyRight = new Story (JSONRight.text);
         RPGfight.SetActive(false);
         playerRightScript = rightPlayerRPG.GetComponent<PlayerScript>();
         playerLeftScript = leftPlayerRPG.GetComponent<PlayerScript>();
@@ -73,26 +73,26 @@ public class GAMEMANAGER : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(leftInk.AreChoicesAvailable() && rightInk.AreChoicesAvailable())
-        {
-        p1Honor = (int)storyLeft.variablesState["honor"];
-        //Debug.Log("p1Honor =" + p1Honor);
-        p2Honor = (int)storyRight.variablesState["honor"];
-        //Debug.Log("p2Honor =" + p2Honor);
-        p1Dishonor = (int)storyLeft.variablesState["dishonor"];
-        p2Dishonor = (int)storyRight.variablesState["dishonor"];
-        p1Cunning = (int)storyLeft.variablesState["cunning"];
-        p2Cunning = (int)storyRight.variablesState["cunning"];
-        p1Brash = (int)storyLeft.variablesState["brash"];
-        p2Brash = (int)storyRight.variablesState["brash"];
-        }
+        //if(leftInk.AreChoicesAvailable() && rightInk.AreChoicesAvailable())
+        
+        p1Honor = (int)leftInk.story.variablesState["honor"];
+        Debug.Log(p1Honor);
+        p2Honor = (int)rightInk.story.variablesState["honor"];
+        Debug.Log("p2Honor =" + p2Honor);
+        p1Dishonor = (int)leftInk.story.variablesState["dishonor"];
+        p2Dishonor = (int)rightInk.story.variablesState["dishonor"];
+        p1Cunning = (int)leftInk.story.variablesState["cunning"];
+        p2Cunning = (int)rightInk.story.variablesState["cunning"];
+        p1Brash = (int)leftInk.story.variablesState["brash"];
+        p2Brash = (int)rightInk.story.variablesState["brash"];
+        
 
        if(!leftInk.AreChoicesAvailable() && !rightInk.AreChoicesAvailable()&& !sceneChanged)
           {
                RPGNarrativeSwitch();
           }  
 
-         if(!currentLeftStory.AreChoicesAvailable() && !currentRightStory.AreChoicesAvailable())
+         if(!currentLeftStory.AreChoicesAvailable() && !currentRightStory.AreChoicesAvailable() && !sceneChanged)
          {
             SceneChange();
             DetermineAttackP1();
