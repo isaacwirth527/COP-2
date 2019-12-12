@@ -30,12 +30,17 @@ public class GAMEMANAGER : MonoBehaviour
     public bool rogueAdv;
     public bool warriorAdv;
     public bool enemyAdv;
-    public EnemyScript enemy;
+    public GameObject enemyObject;
     public GameObject[] LeftHonorOutcomes;
     public GameObject[] RightHonorOutcomes;
     public PlayerScript playerLeftScript;
     public PlayerScript playerRightScript;
     public bool sceneChanged;
+
+    public GameObject pizard;
+    public GameObject shadyGuy;
+    public GameObject enemyClone;
+    public bool pizardOn;
 
     BASEInkIntegration currentLeftStory;
     BASEInkIntegration currentRightStory;
@@ -45,11 +50,9 @@ public class GAMEMANAGER : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // for(int i = 0; i < LeftHonorOutcomes.Length; i++)
-        // {
-        //     LeftHonorOutcomes[i].SetActive(false);
-        //     RightHonorOutcomes[i].SetActive(false);
-        // }
+
+
+        enemyObject = shadyGuy;
         sceneChanged = false;
         storyLeft = new Story(JSONLeft.text);
         storyRight = new Story (JSONRight.text);
@@ -57,6 +60,7 @@ public class GAMEMANAGER : MonoBehaviour
         playerRightScript = rightPlayerRPG.GetComponent<PlayerScript>();
         playerLeftScript = leftPlayerRPG.GetComponent<PlayerScript>();
         controlRPGButtons(false);
+        pizardOn = false;
     }
 
     // Update is called once per frame
@@ -97,6 +101,7 @@ public class GAMEMANAGER : MonoBehaviour
         {
            leftInk.gameObject.SetActive(false);
            rightInk.gameObject.SetActive(false);
+
             if(p1DetermineHonor() && p2DetermineHonor() )
             {
                 LeftHonorOutcomes[0].SetActive(true);
@@ -119,6 +124,7 @@ public class GAMEMANAGER : MonoBehaviour
                 RightHonorOutcomes[2].SetActive(true);
                 currentLeftStory = LeftHonorOutcomes[2].GetComponent<BASEInkIntegration>();
                 currentRightStory = RightHonorOutcomes[2].GetComponent<BASEInkIntegration>();
+                pizardOn = true;
                 Debug.Log("Not Honorable");
             }
               if(p1DetermineHonor() && !p2DetermineHonor() )
@@ -132,6 +138,7 @@ public class GAMEMANAGER : MonoBehaviour
             switchScene = true;
             Debug.Log("scene changed");
             return true;
+
             
         }
         else
@@ -140,19 +147,32 @@ public class GAMEMANAGER : MonoBehaviour
             return false;
 
         }
+
+       
     }
     void SceneChange()
+    
     {
-         
-        {
-            twoStories.SetActive(false);
-            RPGfight.SetActive(true);
-            sceneChanged = true;
+        
+        twoStories.SetActive(false);
+        RPGfight.SetActive(true);
+        sceneChanged = true;
+           if(pizardOn == true)
+            {
+               enemyObject = pizard;
+               pizard.SetActive(true);
+               enemyClone = pizard;
 
-        }
+            }
+            else
+            {
+                enemyObject = shadyGuy;
+                shadyGuy.SetActive(true);
+                enemyClone = shadyGuy;
+            }
+    }
         
 
-    }
 
 
 
@@ -160,21 +180,21 @@ public class GAMEMANAGER : MonoBehaviour
     public Button sneakAttack(Button newButton)
     {  
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Sneak Attack";
-        newButton.onClick.AddListener(()=>damageR(20));
+        newButton.onClick.AddListener(()=>damageR(20f));
         return newButton;
     }
   
     public Button stab(Button newButton)
     {
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Stab";
-        newButton.onClick.AddListener(()=>damageR(10));
+        newButton.onClick.AddListener(()=>damageR(10f));
         return newButton;
     }
 
     public Button dodge(Button newButton)
     {
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Dodge";
-        newButton.onClick.AddListener(()=>damageR(0));
+        newButton.onClick.AddListener(()=>damageR(0f));
         newButton.onClick.AddListener(setDodge);
         return newButton;
     }
@@ -182,7 +202,7 @@ public class GAMEMANAGER : MonoBehaviour
     public Button distract(Button newButton)
     {
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Distract";
-        newButton.onClick.AddListener(()=>damageR(0));
+        newButton.onClick.AddListener(()=>damageR(0f));
         newButton.onClick.AddListener(setWarriorAdv);
         return newButton;
     }
@@ -190,21 +210,21 @@ public class GAMEMANAGER : MonoBehaviour
     public Button feint(Button newButton)
     {
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Feint";
-        newButton.onClick.AddListener(()=>damageW(15));
+        newButton.onClick.AddListener(()=>damageW(15f));
         return newButton;
     }
 
     public Button standardAttack(Button newButton)
     {
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Attack";
-        newButton.onClick.AddListener(()=>damageW(10));
+        newButton.onClick.AddListener(()=>damageW(10f));
         return newButton;
     }
 
     public Button disarm(Button newButton)
     {
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Distract";
-        newButton.onClick.AddListener(()=>damageW(0));
+        newButton.onClick.AddListener(()=>damageW(0f));
         newButton.onClick.AddListener(setRogueAdv);
         return newButton;
     }
@@ -212,7 +232,7 @@ public class GAMEMANAGER : MonoBehaviour
      public Button goLow(Button newButton)
 	 {
          newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Go Low";
-        newButton.onClick.AddListener(()=>damageR(15));
+        newButton.onClick.AddListener(()=>damageR(15f));
          newButton.onClick.AddListener(setWarriorAdv);
         return newButton;
      }
@@ -223,7 +243,7 @@ public class GAMEMANAGER : MonoBehaviour
     	int randomInt = Random.Range(0, 2);
     		if(randomInt == 1)
     		{
-    		    newButton.onClick.AddListener(()=>damageR(15));
+    		    newButton.onClick.AddListener(()=>damageR(15f));
                 newButton.onClick.AddListener(setWarriorAdv);
     		}
     		else
@@ -236,36 +256,37 @@ public class GAMEMANAGER : MonoBehaviour
     public Button charge(Button newButton)
     {
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Charge";
-        newButton.onClick.AddListener(()=>damageW(15));
+        newButton.onClick.AddListener(()=>damageW(15f));
         return newButton;
     }
 
     public Button goHigh(Button newButton)
     {
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = "Go High";
-        newButton.onClick.AddListener(()=>damageW(15));
+        newButton.onClick.AddListener(()=>damageW(15f));
         newButton.onClick.AddListener(setRogueAdv);
         return newButton;
 
     }
 
-    int damageR(int damage)
+    void damageR(float damage)
     {
+        Debug.Log(damage);
         if (rogueAdv)
         {
-            playerLeftScript.adv(damage);
+            playerLeftScript.adv((int)damage);
         }
 
-        return damage;
+        enemyObject.GetComponent<EnemyScript>().enemyHealth -= (int)damage;
     }
 
-    int damageW(int damage)
+    void damageW(float damage)
     {
         if (warriorAdv)
         {
-            playerRightScript.adv(damage);
+            playerRightScript.adv((int)damage);
         }
-        return damage;
+        enemyObject.GetComponent<EnemyScript>().enemyHealth -= (int)damage;
     }
     
     public void setDodge()

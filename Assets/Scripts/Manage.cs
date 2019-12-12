@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Manage : MonoBehaviour
 {
+    public GameObject gm;
     public GameObject enemy;
     public PlayerScript player1;
     public PlayerScript player2;
@@ -32,6 +33,7 @@ public class Manage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        enemy = gm.GetComponent<GAMEMANAGER>().enemyObject;
         chosen1 = player1.choose;
         chosen2 = player2.choose;
 
