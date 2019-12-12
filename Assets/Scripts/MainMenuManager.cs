@@ -24,6 +24,8 @@ public class MainMenuManager : MonoBehaviour
         DescText2.text = "Controls: B + Joystick";
         StartButton.Select();
         StartButton2.Select();
+        StartButton.enabled = true;
+        StartButton2.enabled = false; 
         //StartButton.SetActive(true);
     }
 
@@ -51,7 +53,15 @@ public class MainMenuManager : MonoBehaviour
     
       TitleText.text = "";
       StartButton.GetComponentInChildren<Text>().text = "";
-      DescText.text = "Welcome to my twisted mind! I'm so sorry.";
+        //StartButton.SetActive(false);
+        StartButton.enabled = false;  
+      DescText.text = "Welcome to my twisted mind! I'm so sorry. " +
+                      "Anyway my name is, unimportant. Please, choose your class among yourselves." +
+                      "Warrior in front of monitor one, Rogue go to monitor two. " +
+                      "Or just sit. Don't be a dick about it. " +
+                      "You're done with the first part of this game when you can no longer advance" +
+                      " And then, well, you'll see won't you? Lastly, don't worry too much if you die in the first part " +
+                      " of this game. It is not your end that's important, it's your choices. ";
       p1Text = true;
     
     }
@@ -60,14 +70,22 @@ public class MainMenuManager : MonoBehaviour
     {
       TitleText2.text = "";
       StartButton2.GetComponentInChildren<Text>().text = "";
-      DescText2.text = "Welcome to my twisted mind!";
+        StartButton2.enabled = false; 
+      DescText2.text = "Welcome to my twisted mind! I'm so sorry. " +
+                       "Anyway my name is, unimportant. Please, choose your class among yourselves." +
+                       "Warrior in front of monitor one, Rogue go to monitor two. " +
+                       "Or just sit. Don't be a dick about it. " +
+                       "You're done with the first part of this game when you can no longer advance" +
+                       " And then, well, you'll see won't you? Lastly, don't worry too much if you die in the first part " +
+                       " of this game. It is not your end that's important, it's your choices. ";
       p2Text = true;
       
     }
 
     IEnumerator wait3Sec()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(15.0f);
+       // print(WaitForSeconds);
         SceneManager.LoadScene("Inky");
     }
 
