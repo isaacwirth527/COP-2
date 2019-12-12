@@ -15,11 +15,17 @@ public class MainMenuManager : MonoBehaviour
     public TextMeshProUGUI DescText; 
     public TextMeshProUGUI DescText2;
 
+    public GameObject music;
     public bool p1Text;
     public bool p2Text;
+
+    public FadeInAndOut fadeInAndOut;
+    public FadeInAndOut fadeInAndOut2;
+
     // Start is called before the first frame update
     void Start()
     {
+        music.GetComponent<Animator>().enabled = false;
         DescText.text = "Controls: WASD + Space";
         DescText2.text = "Controls: B + Joystick";
         StartButton.Select();
@@ -42,6 +48,8 @@ public class MainMenuManager : MonoBehaviour
         }
         if(p1Text && p2Text)
         {
+            music.GetComponent<Animator>().enabled = true;
+            // music.GetComponent<Animator>().Play("MusicFade1");
             StartCoroutine(wait3Sec());
             
         }
@@ -85,6 +93,8 @@ public class MainMenuManager : MonoBehaviour
     IEnumerator wait3Sec()
     {
         yield return new WaitForSeconds(15.0f);
+        fadeInAndOut.fadeOut = true;
+        fadeInAndOut2.fadeOut = true;
        // print(WaitForSeconds);
         SceneManager.LoadScene("Inky");
     }

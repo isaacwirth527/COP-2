@@ -13,10 +13,6 @@ public class MusicManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
     void Update()
     {
